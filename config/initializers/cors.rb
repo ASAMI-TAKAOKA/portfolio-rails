@@ -7,7 +7,8 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'http://localhost:3000', 'https://localhost:8080/'
+    # 許可するドメイン
+    origins 'http://localhost:8000'
 
     resource '*',
       headers: :any,

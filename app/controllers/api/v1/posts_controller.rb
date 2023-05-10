@@ -3,13 +3,13 @@ class Api::V1::PostsController < ApplicationController
 
   def index
     @posts = Post.order(created_at: :desc)
-    render json: { status: 'SUCCESS', message: 'Loaded posts', data: @posts }
+    render json: { status: 'SUCCESS', message: 'Loaded posts', data: @posts }, methods: [:image_url]
   end
 
   def create
     @post = Post.new(post_params)
     if @post.save
-      head :ok
+      render json: { status: 'SUCCESS', data: @post }, methods: [:image_url]
     else
       render json: @post.errors, status: :unprocessable_entity
     end
@@ -40,6 +40,6 @@ class Api::V1::PostsController < ApplicationController
 
   private
     def post_params
-      params.permit(:title, :body)
+      params.permit(:product_name, :price, :store_information, :body, :created_at, :image)
     end
 end

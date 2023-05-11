@@ -3,7 +3,7 @@ class Api::V1::PostsController < ApplicationController
 
   def index
     @posts = Post.order(created_at: :desc)
-    render json: { status: 'SUCCESS', message: 'Loaded posts', data: @posts }, methods: [:image_url]
+    render json: { status: 'SUCCESS', message: 'Loaded posts', post: @posts }, methods: [:image_url]
   end
 
   def create
@@ -17,7 +17,7 @@ class Api::V1::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    render json: { post: @post }, status: :ok
+    render json: { post: @post }, status: :ok, methods: [:image_url]
   end
 
   def update

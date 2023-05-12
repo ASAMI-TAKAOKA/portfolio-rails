@@ -13,6 +13,8 @@ class Post < ApplicationRecord
 
   def category_name
     # 紐づいているカテゴリーのnameを取得する
+    # pluckは引数に指定したカラムの値を配列で返してくれる
+    # ["野菜"]こんな感じに
     categories.pluck(:name)
   end
 end

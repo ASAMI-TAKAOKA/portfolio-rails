@@ -10,4 +10,9 @@ class Post < ApplicationRecord
 
   has_many :post_category_relations, dependent: :destroy
   has_many :categories, through: :post_category_relations
+
+  def category_name
+    # 紐づいているカテゴリーのnameを取得する
+    categories.pluck(:name)
+  end
 end

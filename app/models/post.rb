@@ -7,4 +7,7 @@ class Post < ApplicationRecord
     # 紐づいている画像のURLを取得する
     image.attached? ? url_for(image) : nil
   end
+
+  has_many :post_category_relations, dependent: :destroy
+  has_many :categories, through: :post_category_relations
 end

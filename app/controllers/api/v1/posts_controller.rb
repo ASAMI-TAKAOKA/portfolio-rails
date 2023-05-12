@@ -40,6 +40,6 @@ class Api::V1::PostsController < ApplicationController
 
   private
     def post_params
-      params.permit(:product_name, :price, :store_information, :body, :created_at, :image)
+      params.permit(:product_name, :price, :store_information, :body, :created_at, :image, category_ids: [])
     end
 end

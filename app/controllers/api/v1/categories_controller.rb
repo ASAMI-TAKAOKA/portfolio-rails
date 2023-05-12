@@ -2,7 +2,7 @@ class Api::V1::CategoriesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @categories = Category.order(created_at: :desc)
+    @categories = Category.order(created_at: :asc)
     render json: { status: 'SUCCESS', message: 'Loaded categories', category: @categories }
   end
 

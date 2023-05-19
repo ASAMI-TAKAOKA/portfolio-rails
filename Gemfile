@@ -42,3 +42,4 @@ gem "devise"
 gem "devise_token_auth"
 gem "pry-rails"
 gem 'active_model_serializers'
+gem 'ancestry'

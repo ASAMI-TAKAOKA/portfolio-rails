@@ -65,6 +65,8 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
+    ancestry (4.3.3)
+      activerecord (>= 5.2.6)
     bcrypt (3.1.18)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
@@ -196,6 +198,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  ancestry
   bootsnap (>= 1.4.4)
   byebug
   devise

@@ -19,5 +19,5 @@ class Post < ApplicationRecord
     categories.pluck(:name)
   end
   # 誰が投稿したかの情報は必要不可欠なのでバリデーションを設定
-  # validates :user_id, {presence: true}
+  validates :user_id, {presence: true}
 end

@@ -1,7 +1,6 @@
 class Post < ApplicationRecord
   include Rails.application.routes.url_helpers
 
-  belongs_to :user
   has_one_attached :image
   
   def image_url
@@ -18,6 +17,4 @@ class Post < ApplicationRecord
     # ["野菜"]こんな感じに
     categories.pluck(:name)
   end
-  # 誰が投稿したかの情報は必要不可欠なのでバリデーションを設定
-  validates :user_id, {presence: true}
 end

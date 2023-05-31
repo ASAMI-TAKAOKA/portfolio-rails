@@ -2,7 +2,7 @@ class Api::V1::PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @posts = Post.includes(:categories, :user).order(created_at: :desc)
+    @posts = Post.includes(:categories).order(created_at: :desc)
     # get_parent_category_arrayメソッドの戻り値として受け取った配列をインスタンス変数に代入する。
     @parent_category_array = Category.get_parent_category_array
 
@@ -24,10 +24,7 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(
-      post_params,
-      user_id: @current_user.id
-    )
+    @post = Post.new(post_params)
     if @post.save
       # maltilevel_category_createメソッドに引数を4つ渡して実行する。
       PostCategoryRelation.maltilevel_category_create(
@@ -44,7 +41,6 @@ class Api::V1::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @user = User.find_by(id: @post.user_id)
     render json: { status: 'SUCCESS', message: 'Loaded post', post: @post.as_json(methods: [:image_url, :category_name]) }
   end
 

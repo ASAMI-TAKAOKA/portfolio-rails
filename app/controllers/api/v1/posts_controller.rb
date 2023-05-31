@@ -13,16 +13,6 @@ class Api::V1::PostsController < ApplicationController
                  }
   end
 
-  # 親カテゴリーに紐付く子カテゴリーを抽出する
-  def get_category_children
-    @category_children = Category.find(params[:parent_id]).children
-  end
-
-  # 子カテゴリーに紐付く孫カテゴリーを抽出する
-  def get_category_grandchildren
-    @category_grandchildren = Category.find(params[:children_id]).children
-  end
-
   def create
     @post = Post.new(post_params)
     if @post.save

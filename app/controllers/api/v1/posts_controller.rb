@@ -14,9 +14,10 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def create
+    # binding.pry
     @post = Post.new(
       post_params,
-      user_id: @current_user.id
+      # user_id: current_user.id
     )
     if @post.save
       # maltilevel_category_createメソッドに引数を4つ渡して実行する。
@@ -58,6 +59,6 @@ class Api::V1::PostsController < ApplicationController
 
   private
     def post_params
-      params.permit(:product_name, :price, :store_information, :body, :created_at, :image, { category_ids: [] }, :parent_id, :children_id, :grandchildren_id)
+      params.permit(:product_name, :price, :store_information, :body, :created_at, :image, { category_ids: [] })
     end
 end

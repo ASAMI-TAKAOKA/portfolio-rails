@@ -17,4 +17,10 @@ class Post < ApplicationRecord
     # ["野菜"]こんな感じに
     categories.pluck(:name)
   end
+
+  def user
+    #インスタンスメソッドなので、selfはUserオブジェクトのインスタンス自身を表す
+    return User.find_by(id: self.user_id)
+  end
+  
 end

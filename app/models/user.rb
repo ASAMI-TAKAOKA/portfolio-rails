@@ -6,4 +6,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
+
+  # ユーザーに紐づいた投稿情報を全て取得
+  def posts
+    return Post.where(user_id: self.id)
+  end  
 end

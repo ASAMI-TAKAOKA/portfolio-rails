@@ -1,6 +1,6 @@
 class Api::V1::PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   def index
     @posts = Post.includes(:categories).order(created_at: :desc)
@@ -15,7 +15,7 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     if @post.save
       # maltilevel_category_createメソッドに引数を4つ渡して実行する。
       PostCategoryRelation.maltilevel_category_create(
@@ -32,7 +32,13 @@ class Api::V1::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    render json: { status: 'SUCCESS', message: 'Loaded post', post: @post.as_json(methods: [:image_url, :category_name]) }
+    # @user = User.find_by(id: @post.user_id) 代わりにpost.rbで定義したuser methodを使用する
+    user = @post.user
+    render json: { status: 'SUCCESS',
+                   message: 'Loaded post',
+                   post: @post.as_json(methods: [:image_url, :category_name]),
+                   user: user.as_json
+                 }
   end
 
   def update

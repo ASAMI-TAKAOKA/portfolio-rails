@@ -27,6 +27,9 @@ gem 'hirb', '~> 0.7.3'
 gem 'hirb-unicode-steakknife', '~> 0.0.9'
 gem 'bcrypt', '~> 3.1', '>= 3.1.18'
 
+# jwt: https://rubygems.org/gems/jwt
+gem 'jwt', '~> 2.7', '>= 2.7.1'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

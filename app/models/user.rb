@@ -51,6 +51,16 @@ class User < ActiveRecord::Base
     users.find_by_activated(email).present?
   end
 
+  # リフレッシュトークンのJWT IDを記憶する
+  def remember(jti)
+    update!(refresh_jti: jti)
+  end
+
+  # リフレッシュトークンのJWT IDを記憶する
+  def forget
+    update!(refresh_jti: nil)
+  end
+
   # ユーザーに紐づいた投稿情報を全て取得
   def posts
     return Post.where(user_id: self.id)

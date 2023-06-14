@@ -65,6 +65,12 @@ class User < ActiveRecord::Base
     update!(refresh_jti: nil)
   end
 
+  # 共通のJSONレスポンスを返す
+  # with_indifferent_access ハッシュのキーをシンボルでも文字列でも取得できるようにする
+  def response_json(payload = {})
+    as_json(only: [:id, :name]).merge(payload).with_indifferent_access
+  end
+
   # ユーザーに紐づいた投稿情報を全て取得
   def posts
     return Post.where(user_id: self.id)

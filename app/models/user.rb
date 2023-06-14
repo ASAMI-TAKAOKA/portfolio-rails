@@ -2,6 +2,8 @@
 require "validator/email_validator"
 
 class User < ActiveRecord::Base
+  # Token生成モジュール
+  include TokenGenerateService
   # バリデーション直前に実行
   before_validation :downcase_email
   # Include default devise modules. Others available are:

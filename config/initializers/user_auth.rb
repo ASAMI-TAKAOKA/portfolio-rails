@@ -17,10 +17,12 @@ module UserAuth
 
   # JWTの発行者を識別する文字列(認可サーバーURL)
   mattr_accessor :token_issuer
+  # TODO:あとで環境変数に置き換える
   self.token_issuer = "http://localhost:3000"
 
   # JWTの受信者を識別する文字列(保護リソースURL)
   mattr_accessor :token_audience
+  # TODO:あとで環境変数に置き換える
   self.token_audience = "http://localhost:3000"
 
   # JWTの署名アルゴリズム

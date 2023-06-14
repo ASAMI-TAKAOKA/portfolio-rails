@@ -27,11 +27,13 @@ class User < ActiveRecord::Base
 
   VALID_PASSWORD_REGEX = /\A[\w\-]+\z/
   validates :password, presence: true,
-                      length: { minimum: 8,
+                      length: {
+                        minimum: 8,
                         allow_blank: true
                       },
                       format: {
                         with: VALID_PASSWORD_REGEX,
+                        message: :invalid_password,
                         allow_blank: true
                       },
                       allow_nil: true

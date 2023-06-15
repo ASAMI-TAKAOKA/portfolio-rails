@@ -42,24 +42,11 @@ module PortfolioRails
     config.add_autoload_paths_to_load_path = false
     # Cookieを処理するmeddlewareを追加
     config.middleware.use ActionDispatch::Cookies
+
     config.api_only = true
-    # CORS
-    # TODO: origins '*'の部分は必ずあとで修正すること
+
     config.session_store :cookie_store, key: '_interslice_session'
-    config.middleware.use ActionDispatch::Cookies # Required for all session management
     config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
     config.middleware.use ActionDispatch::Flash
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins 'http://localhost:8000' || ""
-
-        resource '*',
-                 :headers => :any,
-                 :expose => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
-                 :methods => [:get, :post, :options, :delete, :put],
-                 :credentials => true
-
-      end
-    end
   end
 end

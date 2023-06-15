@@ -2,10 +2,13 @@ class ApplicationController < ActionController::Base
         # include DeviseTokenAuth::Concerns::SetUserByToken
         # Cookieを扱う
         include ActionController::Cookies
+        skip_before_action :verify_authenticity_token
         # 認可を行う
         include UserAuthenticateService
-        # CSRF対策で用いられるメソッド
-        protect_from_forgery
+
+        # CSRF対策で用いられるメソッド これだと上手くいかない
+        # protect_from_forgery
+
         # CSRF対策
         before_action :xhr_request?
         # before_action :configure_permitted_parameters, if: :devise_controller?

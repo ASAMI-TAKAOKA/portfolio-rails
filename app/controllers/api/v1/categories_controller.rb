@@ -1,5 +1,6 @@
 class Api::V1::CategoriesController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
+  before_action :authenticate_active_user
 
   def index
     @categories = Category.order(created_at: :asc)

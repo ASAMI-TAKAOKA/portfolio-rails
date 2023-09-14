@@ -2,31 +2,43 @@ class Api::V1::PostsController < ApplicationController
   # skip_before_action :verify_authenticity_token
   # before_action :authenticate_user!
   before_action :authenticate_active_user
-
-  def index
-    @posts = Post.includes(:categories).order(created_at: :desc)
-    # get_parent_category_arrayメソッドの戻り値として受け取った配列をインスタンス変数に代入する。
-    @parent_category_array = Category.get_parent_category_array
-
-    render json: { status: 'SUCCESS',
-                   message: 'Loaded posts',
-                   post: @posts.as_json(methods: [:image_url, :category_name]),
-                   parent_category_array: @parent_category_array.as_json,
-                 }
-  end
-
+  
   # def index
-  #   posts = []
-  #   date = Date.new(2021,4,1)
-  #   10.times do |n|
-  #     id = n + 1
-  #     name = "#{current_user.name} post #{id.to_s.rjust(2, "0")}"
-  #     updated_at = date + (id * 6).hours
-  #     posts << { id: id, name: name, updatedAt: updated_at }
-  #   end
-  #   # 本来はcurrent_user.posts
+  #   # 本来はDBから取得する => current_user.posts
+  #   posts = [
+  #     { id: 1, name: 'Rails MyPost01', updatedAt: '2020-04-01T12:00:00+09:00' },
+  #     { id: 2, name: 'Rails MyPost02', updatedAt: '2020-04-05T12:00:00+09:00' },
+  #     { id: 3, name: 'Rails MyPost03', updatedAt: '2020-04-03T12:00:00+09:00' },
+  #     { id: 4, name: 'Rails MyPost04', updatedAt: '2020-04-04T12:00:00+09:00' },
+  #     { id: 5, name: 'Rails MyPost05', updatedAt: '2020-04-01T12:00:00+09:00' }
+  #   ]
   #   render json: posts
   # end
+
+  # def index
+  #   @posts = Post.includes(:categories).order(created_at: :desc)
+  #   # get_parent_category_arrayメソッドの戻り値として受け取った配列をインスタンス変数に代入する。
+  #   @parent_category_array = Category.get_parent_category_array
+
+  #   render json: { status: 'SUCCESS',
+  #                  message: 'Loaded posts',
+  #                  post: @posts.as_json(methods: [:image_url, :category_name]),
+  #                  parent_category_array: @parent_category_array.as_json,
+  #                }
+  # end
+
+  def index
+    posts = []
+    date = Date.new(2021,4,1)
+    10.times do |n|
+      id = n + 1
+      name = "#{current_user.name} post #{id.to_s.rjust(2, "0")}"
+      updated_at = date + (id * 6).hours
+      posts << { id: id, name: name, updatedAt: updated_at }
+    end
+    # 本来はcurrent_user.posts
+    render json: posts
+  end
 
   def create
     @post = current_user.posts.build(post_params)

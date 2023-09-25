@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       # mount_devise_token_auth_for 'User', at: 'auth' ←使用をやめる
       
       # auth_token_controller
+      resources :users, only:[:index]
       resources :auth_token, only:[:create] do
         post :refresh, on: :collection
         delete :destroy, on: :collection
